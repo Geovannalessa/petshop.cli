@@ -46,6 +46,24 @@ module.exports = {
 
         //gravar array de cachorros no arquivo cachorros.json
         fs.writeFileSync('./database/cachorros.json', JSON.stringify(cachorros));
+    },
+    vacinar:function(pos, nomeDaVacina){
+        //verificar se existe um cachorro na posição passada
+        if(pos >= cachorros.length || pos < 0){
+            console.log("Cachorro inexistente");
+            return;
+    
+        }
+        let nomeVacina = {
+            nome:nomeDaVacina,
+            data:(new Date()).toISOString().substr(0,10)
+        }
+        //adicionar esse objeto literal com as informações da vacina
+        cachorros[pos].vacinas.push(nomeVacina);
+
+        //salvar o array de cachorros no arquivos
+        fs.writeFileSync('./database/cachorros.json', JSON.stringify(cachorros,null,4));
+
     }
 
 
